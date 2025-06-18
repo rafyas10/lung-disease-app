@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="icon/icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Pengguna</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="#"><strong>Cek Paru Kuy</strong></a>
+      <button class="btn btn-outline-danger" id="logout-btn">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Welcome Section -->
+  <div class="container mt-5 text-center">
+    <h1 class="mb-4">Selamat Datang, <span id="username">Pengguna</span>!</h1>
+    <p class="lead">Silakan mulai diagnosa dengan menekan tombol di bawah ini.</p>
+    <a href="test.html" class="btn btn-primary btn-lg mt-3">Diagnosa Sekarang</a>
+  </div>
+
+  <script>
+    // Cek apakah user ada di localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      window.location.href = "index.html"; // Arahkan ke index jika belum login
+    } else {
+      document.getElementById("username").textContent = user.nama;
+    }
+
+    // Logout handler
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("user");
+      window.location.href = "index.html";
+    });
+  </script>
+
+</body>
+</html>

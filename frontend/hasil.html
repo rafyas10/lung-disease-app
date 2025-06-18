@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="icon/icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hasil Diagnosa</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand"><strong>Hasil Diagnosa</strong></a>
+      <div>
+        <a href="test.html" class="btn btn-success mx-2">Cek Ulang</a>
+        <a href="index.html" class="btn btn-primary">Beranda</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h3 class="mb-4">Diagnosa Penyakit yang Diderita:</h3>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <th>Hasil Diagnosa</th>
+          <td id="penyakit-tertinggi">Memuat...</td>
+        </tr>
+        <tr>
+          <th>Persentase</th>
+          <td id="persentase">Memuat...</td>
+        </tr>
+        <tr>
+          <th>Gejala yang Dipilih</th>
+          <td id="gejala-dipilih">Memuat...</td>
+        </tr>
+        <tr>
+          <th>Deskripsi & Solusi</th>
+          <td id="solusi">Memuat...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script type="module">
+    // Ambil data dari localStorage atau fetch dari backend
+    const hasil = JSON.parse(localStorage.getItem("hasilDiagnosa"));
+    const gejala = JSON.parse(localStorage.getItem("jawabanGejala")) || [];
+
+    if (!hasil || !hasil.penyakit || !hasil.persentase) {
+      document.getElementById("penyakit-tertinggi").textContent = "Belum ada data.";
+      document.getElementById("persentase").textContent = "-";
+      document.getElementById("gejala-dipilih").textContent = "-";
+      document.getElementById("solusi").textContent = "-";
+    } else {
+      document.getElementById("penyakit-tertinggi").textContent = hasil.penyakit;
+      document.getElementById("persentase").textContent = hasil.persentase + "%";
+
+      // Tampilkan gejala yang dijawab "Ya"
+      const gejalaYa = gejala.filter(g => g.answer).map(g => `Gejala #${g.id}`);
+      document.getElementById("gejala-dipilih").innerHTML = gejalaYa.length
+        ? "<ul>" + gejalaYa.map(g => `<li>${g}</li>`).join("") + "</ul>"
+        : "Tidak ada gejala yang dipilih";
+
+      // Tampilkan deskripsi dan solusi
+      document.getElementById("solusi").innerHTML = `
+        <strong>Deskripsi:</strong> ${hasil.deskripsi || "-"}<br/>
+        <strong>Solusi:</strong> ${hasil.solusi || "-"}
+      `;
+    }
+  </script>
+</body>
+</html>

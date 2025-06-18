@@ -1,0 +1,49 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-lung
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql1001
+      MYSQL_DATABASE: lung_disease
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - lung-net
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./auth-service/.env
+    depends_on:
+      - mysql
+    networks:
+      - lung-net
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8081:8081"
+    environment:
+      - AUTH_SERVICE_URL=http://auth-service:8080
+      - GATEWAY_PORT=8081
+    depends_on:
+      - auth-service
+    networks:
+      - lung-net
+
+networks:
+  lung-net:
+
+volumes:
+  db-data:

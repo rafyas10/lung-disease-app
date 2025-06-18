@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="icon/icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnosa Penyakit Paru</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="menu.html"><strong>Cek Paru Kuy</strong></a>
+      <a href="menu.html" class="btn btn-outline-primary">← Kembali ke Beranda</a>
+    </div>
+  </nav>
+
+  <!-- Diagnosis Section -->
+  <div class="container mt-5">
+    <h2 class="mb-4 text-center">Pertanyaan Gejala</h2>
+    <div id="question-container" class="text-center">
+      <h4 id="question-text">Memuat pertanyaan...</h4>
+      <div class="btn-group mt-4">
+        <button class="btn btn-success btn-lg mx-2" id="btn-yes">Ya</button>
+        <button class="btn btn-danger btn-lg mx-2" id="btn-no">Tidak</button>
+      </div>
+    </div>
+    <div id="result" class="mt-5 text-center text-primary"></div>
+  </div>
+
+  <script type="module" src="js/test.js"></script>
+</body>
+</html>
