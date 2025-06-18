@@ -1,7 +1,7 @@
 # ===============================
 # Dockerfile untuk auth-service
 # ===============================
-FROM golang:1.21-alpine
+FROM golang:1.24.4-alpine
 
 # Install git (dibutuhkan saat go get)
 RUN apk add --no-cache git
