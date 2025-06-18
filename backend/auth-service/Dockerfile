@@ -19,5 +19,7 @@ COPY . .
 # Build binary
 RUN go build -o main .
 
+EXPOSE 8080
+
 # Jalankan aplikasi
 CMD ["./main"]
