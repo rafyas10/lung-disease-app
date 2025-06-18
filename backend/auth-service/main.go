@@ -31,4 +31,6 @@ func main() {
 
 	// Jalankan server
 	router.Run(":8080")
+
+	//testing
 }
