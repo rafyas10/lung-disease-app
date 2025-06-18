@@ -6,7 +6,8 @@ on:
       - main
     paths:
       - "backend/auth-service/**"
-  workflow_dispatch: 🟢
+  workflow_dispatch: # ✅ Perbaiki ini juga, sebelumnya kamu menulis: `workflow_dispatch: 🟢`
+    {}
 
 jobs:
   deploy:
@@ -32,7 +33,7 @@ jobs:
       - name: Configure Docker auth for Artifact Registry
         run: gcloud auth configure-docker asia-southeast2-docker.pkg.dev --quiet
 
-      # Build and push image to Artifact Registry
+      # ✅ Build and push ke Artifact Registry
       - name: Build and Push Docker image
         run: |
           docker build -t asia-southeast2-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/lung-app/auth-service ./backend/auth-service
@@ -41,7 +42,7 @@ jobs:
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy auth-service \
-            --image asia-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/lung-app/auth-service \
+            --image asia-southeast2-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/lung-app/auth-service \
             --region asia-southeast2 \
             --platform managed \
             --allow-unauthenticated \
