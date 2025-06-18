@@ -4,7 +4,7 @@ import (
 	"auth-service/database"
 	"auth-service/routes"
 	"log"
-
+	"os"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -30,7 +30,11 @@ func main() {
 	routes.RegisterAuthRoutes(router)
 
 	// Jalankan server
-	router.Run(":8080")
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // fallback default
+	}
+	router.Run(":" + port)
 
 	//testing
 }
