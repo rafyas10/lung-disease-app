@@ -46,3 +46,6 @@ jobs:
             --region asia-southeast2 \
             --platform managed \
             --allow-unauthenticated
+
+      - name: Debug print project ID
+        run: echo "PROJECT_ID=${{ secrets.GCP_PROJECT_ID }}"
