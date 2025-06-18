@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "backend/auth-service/**"
-  workflow_dispatch:
+  workflow_dispatch: 🟢
 
 jobs:
   deploy:
