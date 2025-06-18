@@ -45,5 +45,4 @@ jobs:
             --image asia-southeast2-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/lung-app/auth-service \
             --region asia-southeast2 \
             --platform managed \
-            --allow-unauthenticated \
-            --set-env-vars=PORT=8080
+            --allow-unauthenticated
