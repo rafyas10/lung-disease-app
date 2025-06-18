@@ -32,7 +32,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/auth-service ./auth-service
+          docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/auth-service ./backend/auth-service
           docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/auth-service
 
       - name: Deploy to Cloud Run
