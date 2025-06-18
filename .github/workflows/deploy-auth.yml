@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - "auth-service/**"
+      - "backend/auth-service/**"
+  workflow_dispatch:  # 🟢 Tambahkan ini agar bisa dijalankan manual
 
 jobs:
   deploy:
