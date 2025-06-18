@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - "backend/auth-service/**"
-  workflow_dispatch:  # 🟢 Tambahkan ini agar bisa dijalankan manual
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -28,7 +28,9 @@ jobs:
         uses: google-github-actions/setup-gcloud@v2
         with:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          export_default_credentials: true
+
+      - name: Configure Docker auth for Artifact Registry
+        run: gcloud auth configure-docker asia-docker.pkg.dev --quiet
 
       - name: Build and Push Docker image
         run: |
